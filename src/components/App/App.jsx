@@ -8,12 +8,31 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 
+const modalParams = {
+  isOpen: false,
+  url: ''
+};
+
+
+
+
 function App() {
   const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
+  const [modalIsOpen, setIsOpen] = useState(modalParams);
+
+  const handleImageClick = (url) => {
+    modalIsOpen({ isOpen: true, url })
+    
+  }
+
+  
+  const handleCloseModal = ()  =>{
+    setIsOpen(modalParams);
+  }
 
   useEffect(() => {
     async function fetchImageGallery() {
@@ -49,7 +68,7 @@ function App() {
       
       <SearchBar onSubmit={handleSubmit} />
       {error && <ErrorMessage />}
-      {gallery.length > 0 && <ImageGallery gallery={gallery} />}
+      {gallery.length > 0 && <ImageGallery gallery={gallery} onClick={handleImageClick} />}
       {loading && <Loader />}
       {gallery.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
        
@@ -63,5 +82,7 @@ function App() {
   
   
 }
+
+
 
 export default App

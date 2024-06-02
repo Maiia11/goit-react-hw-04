@@ -1,13 +1,13 @@
  import ImageCard from "../ImageCard/ImageCard"
 
 
-const ImageGallery = ({ gallery }) => {
+const ImageGallery = ({ gallery, onClick}) => {
     return (
         <ul>
-            {gallery.map(({ id, urls:{small}, alt_description }) => {
+            {gallery.map(({ id, urls:{small, regular}, alt_description }) => {
                 return (
                 <li key={id}>
-                        <ImageCard url={small} alt={alt_description } />
+                        <ImageCard url={small} alt={alt_description} onClick={()=> onClick(regular) } />
                         
                     </li>
                    
