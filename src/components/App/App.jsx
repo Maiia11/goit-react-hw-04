@@ -5,32 +5,52 @@ import './App.css'
 import {getImageGallery} from '../image-gallery-api'
  import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function App() {
   const [gallery, setGallery] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchImageGallery() {
       try {
+        setError(false);
         setLoading(true);
-        const data = await getImageGallery("sun");
+        const data = await getImageGallery(query, page);
         console.log(data);
-        setGallery(data);
+        setGallery((prev) => [...prev, ...data]);
       } catch (error) {
-        console.log(error);
+        setError(true);
+      } finally {
+        setLoading(false)
       }
     }
-    fetchImageGallery()
-  }, [])
+  query && fetchImageGallery()
+  }, [query, page])
+
+  const handleSubmit = async (searchQuery) => {
+    setQuery(searchQuery)
+    setGallery([])
+    setPage(1)
+
+  }
+
+  const handleLoadMore = async () => {
+    setPage(page + 1)
+  }
 
   
   return (
     <>
       
-      <SearchBar />
-      <ImageGallery gallery={gallery} /> 
-      <Loader/>
+      <SearchBar onSubmit={handleSubmit}/>
+      {gallery.length > 0 && <ImageGallery gallery={gallery} /> }
+      {loading && <Loader />}
+       {error &&  <ErrorMessage/>}
+      
       
       
 
