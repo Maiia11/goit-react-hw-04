@@ -6,6 +6,7 @@ import {getImageGallery} from '../image-gallery-api'
  import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 
 function App() {
   const [gallery, setGallery] = useState([]);
@@ -46,10 +47,12 @@ function App() {
   return (
     <>
       
-      <SearchBar onSubmit={handleSubmit}/>
-      {gallery.length > 0 && <ImageGallery gallery={gallery} /> }
+      <SearchBar onSubmit={handleSubmit} />
+      {error && <ErrorMessage />}
+      {gallery.length > 0 && <ImageGallery gallery={gallery} />}
       {loading && <Loader />}
-       {error &&  <ErrorMessage/>}
+      {gallery.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
+       
       
       
       
