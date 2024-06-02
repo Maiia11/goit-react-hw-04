@@ -1,23 +1,20 @@
 
-// import { useEffect } from 'react';
 import { useEffect, useState } from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import './App.css'
 import {getImageGallery} from '../image-gallery-api'
-
-// import axios from 'axios';
-
-// const key = 'zDei0CTQ82bIpGgBAWl-KIKshW8lXqg3k_pY_IM5bRY';
-
-
+ import ImageGallery from '../ImageGallery/ImageGallery';
+import Loader from '../Loader/Loader';
 
 function App() {
   const [gallery, setGallery] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function fetchImageGallery() {
       try {
-        const data = await getImageGallery("office");
+        setLoading(true);
+        const data = await getImageGallery("sun");
         console.log(data);
         setGallery(data);
       } catch (error) {
@@ -32,6 +29,9 @@ function App() {
     <>
       
       <SearchBar />
+      <ImageGallery gallery={gallery} /> 
+      <Loader/>
+      
       
 
     </>
