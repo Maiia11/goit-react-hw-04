@@ -1,6 +1,10 @@
 
 // import { useEffect } from 'react';
+import { useEffect, useState } from 'react'
+import SearchBar from '../SearchBar/SearchBar'
 import './App.css'
+import {getImageGallery} from '../image-gallery-api'
+
 // import axios from 'axios';
 
 // const key = 'zDei0CTQ82bIpGgBAWl-KIKshW8lXqg3k_pY_IM5bRY';
@@ -8,15 +12,32 @@ import './App.css'
 
 
 function App() {
+  const [gallery, setGallery] = useState([]);
 
-  // useEffect(() => {
-  //   async function fetch() {
-  //     const response = await axios.get('https://api.unsplash.com/search/photos?client_id=zDei0CTQ82bIpGgBAWl-KIKshW8lXqg3k_pY_IM5bRY&page=1&query=office');
-  //     console.log(response)
+  useEffect(() => {
+    async function fetchImageGallery() {
+      try {
+        const data = await getImageGallery("office");
+        console.log(data);
+        setGallery(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchImageGallery()
+  }, [])
+
+  
+  return (
+    <>
       
-  //   }
-  //   fetch()
-  // }, [])
+      <SearchBar />
+      
+
+    </>
+  )
+
+  
   
 }
 
