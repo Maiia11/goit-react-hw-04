@@ -8,6 +8,7 @@ export const getImageGallery = async (searchQuery, page) => {
     const { data } = await axios.get(`/search/photos?client_id=${acceptKey}`, {
         params: {
             query: searchQuery,
+            per_page: 9,
             page
         }
     })

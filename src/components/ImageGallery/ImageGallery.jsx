@@ -1,10 +1,10 @@
  import ImageCard from "../ImageCard/ImageCard"
-
+import css from "./ImageGallery.module.css"
 
 const ImageGallery = ({ gallery, onClick }) => {
 
     return (
-        <ul>
+        <ul className={css.list}>
             {gallery.map(({ id, urls: { small, regular }, alt_description }) => {
                 
                 return (

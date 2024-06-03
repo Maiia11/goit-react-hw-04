@@ -27,6 +27,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ddebf4;
 }
 
 h1 {
@@ -49,7 +50,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto rgb(175, 209, 231);
+  outline: 4px auto rgb(176, 46, 46);
 }
 
 @media (prefers-color-scheme: light) {
@@ -61,7 +62,7 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #e6e8ee;
+    background-color: #f06d0a;
   }
 }
 
