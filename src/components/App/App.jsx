@@ -28,7 +28,6 @@ function App() {
         setError(false);
         setLoading(true);
         const data = await getImageGallery(query, page);
-        console.log(data);
         setGallery((prev) => [...prev, ...data]);
       } catch (error) {
         setError(true);
@@ -67,15 +66,9 @@ function App() {
       {loading && <Loader />}
       {gallery.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
       {modalIsOpen && <ImageModal url={modalIsOpen.url}
-                                isOpen={modalIsOpen.isOpen}
-                                onClose={handleCloseModal}
-                                onRequestClose={handleCloseModal} />}
-
-
-       
-      
-      
-      
+        isOpen={modalIsOpen.isOpen}
+        onClose={handleCloseModal}
+        onRequestClose={handleCloseModal} />}
 
     </>
   )

@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 const ImageModal = ({ isOpen, onClose, url }) => {
- console.log(url);
 
   return (
      <Modal
