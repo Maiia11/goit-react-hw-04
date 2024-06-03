@@ -4,10 +4,11 @@
 const ImageGallery = ({ gallery, onClick}) => {
     return (
         <ul>
-            {gallery.map(({ id, urls:{small, regular}, alt_description }) => {
+            {gallery.map(({ id, urls: { small, regular }, alt_description }) => {
+                console.log(regular);
                 return (
                 <li key={id}>
-                        <ImageCard url={small} alt={alt_description} onClick={()=> onClick(regular) } />
+                        <ImageCard url={small} alt={alt_description} regular={regular} onClick={onClick} />
                         
                     </li>
                    

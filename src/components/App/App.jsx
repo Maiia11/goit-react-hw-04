@@ -7,14 +7,12 @@ import {getImageGallery} from '../image-gallery-api'
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import ImageModal from '../ImageModal/ImageModal';
 
 const modalParams = {
   isOpen: false,
   url: ''
 };
-
-
-
 
 function App() {
   const [gallery, setGallery] = useState([]);
@@ -23,16 +21,6 @@ function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [modalIsOpen, setIsOpen] = useState(modalParams);
-
-  const handleImageClick = (url) => {
-    modalIsOpen({ isOpen: true, url })
-    
-  }
-
-  
-  const handleCloseModal = ()  =>{
-    setIsOpen(modalParams);
-  }
 
   useEffect(() => {
     async function fetchImageGallery() {
@@ -62,15 +50,27 @@ function App() {
     setPage(page + 1)
   }
 
-  
+  const handleImageClick = (url) => {
+    setIsOpen({ isOpen: true, url: url })
+    
+  }
+
+  const handleCloseModal = ()  =>{
+    setIsOpen(modalParams);
+  }
+
   return (
     <>
-      
       <SearchBar onSubmit={handleSubmit} />
       {error && <ErrorMessage />}
       {gallery.length > 0 && <ImageGallery gallery={gallery} onClick={handleImageClick} />}
       {loading && <Loader />}
       {gallery.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
+      {modalIsOpen && <ImageModal url={modalParams.url}
+                        isOpen={modalParams.isOpen}
+                        onClose={handleCloseModal}/>}
+
+
        
       
       
