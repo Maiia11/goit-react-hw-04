@@ -66,9 +66,10 @@ function App() {
       {gallery.length > 0 && <ImageGallery gallery={gallery} onClick={handleImageClick} />}
       {loading && <Loader />}
       {gallery.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
-      {modalIsOpen && <ImageModal url={modalParams.url}
-                        isOpen={modalParams.isOpen}
-                        onClose={handleCloseModal}/>}
+      {modalIsOpen && <ImageModal url={modalIsOpen.url}
+                                isOpen={modalIsOpen.isOpen}
+                                onClose={handleCloseModal}
+                                onRequestClose={handleCloseModal} />}
 
 
        

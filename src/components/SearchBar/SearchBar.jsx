@@ -16,6 +16,7 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <header>
+    <Toaster position="top-right" />
   <form onSubmit={handleSubmit}>
     <input type="text" autoComplete="off" autoFocus placeholder="Search images and photos" name="topic"
     />
