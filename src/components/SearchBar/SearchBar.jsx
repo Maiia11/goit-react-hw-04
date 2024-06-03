@@ -17,7 +17,16 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <header className={css.container}>
-    <Toaster position="top-right" />
+    <Toaster position="top-right" toastOptions={{
+    className: '',
+    style: {
+      border: '1px solid #713200',
+      padding: '16px',
+      color: 'rgb(235, 60, 60)',
+      width: '175px',
+
+    },
+  }} />
   <form onSubmit={handleSubmit}>
     <input className={css.input} type="text" autoComplete="off" autoFocus placeholder="Search images and photos" name="topic"/>
     <button className={css.btn} type="submit">Search</button>

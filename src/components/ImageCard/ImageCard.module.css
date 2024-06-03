@@ -11,7 +11,7 @@
 .listText{
     display: flex;
     justify-content: center;
-    background-color: rgb(70, 67, 232);;
+    background-color: rgb(70, 67, 232) ;
     padding: 0;
     margin: 0;
     gap: 12px;

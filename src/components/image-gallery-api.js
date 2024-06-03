@@ -12,6 +12,5 @@ export const getImageGallery = async (searchQuery, page) => {
             page
         }
     })
-console.log(data);
     return data
 }
