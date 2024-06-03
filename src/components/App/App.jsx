@@ -21,6 +21,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [modalIsOpen, setIsOpen] = useState(modalParams);
+  const [showLoadMore, setShowLoadMore] = useState(false);
 
   useEffect(() => {
     async function fetchImageGallery() {
@@ -28,7 +29,8 @@ function App() {
         setError(false);
         setLoading(true);
         const data = await getImageGallery(query, page);
-        setGallery((prev) => [...prev, ...data]);
+        setGallery((prev) => [...prev, ...data.results]);
+        setShowLoadMore (data.total_pages && data.total_pages !== page)
       } catch (error) {
         setError(true);
       } finally {
@@ -64,7 +66,7 @@ function App() {
       {error && <ErrorMessage />}
       {gallery.length > 0 && <ImageGallery gallery={gallery} onClick={handleImageClick} />}
       {loading && <Loader />}
-      {gallery.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
+      {gallery.length > 0 && showLoadMore && <LoadMoreBtn onClick={handleLoadMore} />}
       {modalIsOpen && <ImageModal url={modalIsOpen.url}
         isOpen={modalIsOpen.isOpen}
         onClose={handleCloseModal}
